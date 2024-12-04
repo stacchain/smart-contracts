@@ -184,6 +184,100 @@ npm run verify -- DEPLOYED_CONTRACT_ADDRESS
   - Ensures that access codes are user-specific and cannot be used by others.
   - Supports time-limited validity for access codes to balance user convenience and security.
 
+## How an External API Validates an Access Code
+
+### 1. User Interaction with the API:
+
+- The user sends their **access code** and wallet address to the API to request data access.
+- Example: The user provides `STAC-abc123` as their access code and `0xUserAddress` as their wallet address.
+
+### 2. API Queries the Blockchain:
+
+- The API interacts with the **STACAccessCode** contract deployed on the blockchain to validate the access code.
+- The API uses the following contract function for validation:
+
+```solidity
+function verifyAccessCode(address user, string memory accessCode) external view returns (bool)
+```
+
+- The API provides the user's wallet address (user) and the access code (accessCode) to this function.
+
+### 3. Blockchain Verification:
+
+- The contract checks:
+  - The hash of the provided `accessCode` matches the stored hash for the `user`.
+  - The access code has **not expired** (if time-limited).
+- The contract returns `true` if the access code is valid and `false` otherwise.
+
+### 4. API Grants or Denies Access:
+
+- If the contract returns `true`, the API grants access to the requested data.
+- If the contract returns `false`, the API denies access and may return an error message indicating an invalid or expired access code.
+
+## Example Workflow
+
+### Step 1: User Sends Request
+
+- The user sends the following to the API:
+
+```json
+{
+  "accessCode": "STAC-abc123",
+  "walletAddress": "0xUserAddress"
+}
+```
+
+### Step 2: API Validates the Access Code
+
+- The API uses a blockchain library (e.g., **Ethers.js** or **Web3.js**) to query the contract:
+
+```javascript
+const contract = new ethers.Contract(contractAddress, contractABI, provider);
+
+const isValid = await contract.verifyAccessCode(
+  userWalletAddress,
+  userProvidedAccessCode
+);
+
+if (isValid) {
+  // Grant access
+  return { success: true, message: "Access granted." };
+} else {
+  // Deny access
+  return { success: false, message: "Invalid or expired access code." };
+}
+```
+
+### Step 3: Grant or Deny Access
+
+- If the code is valid, the API allows the user to access the requested geospatial data.
+- If the code is invalid or expired, the API denies access and informs the user.
+
+## How the API Idenitfies a Valid Code
+
+### 1. Tied to the User's Address:
+
+- The access code is only valid for the wallet address that purchased it.
+- The contract checks the combination of the user's wallet address and the provided access code.
+
+### 2. Tamper-Proof Hash:
+
+- The access code is hashed and stored on-chain. An attacker cannot generate a valid hash without the original access code.
+
+### 3. Expiration Time:
+
+- If the access code has an expiration period, the contract ensures it is still valid at the time of verification.
+
+## Advantages of On-Chain Validation
+
+- **Security**:
+  - The blockchain provides a decentralized and tamper-proof mechanism for validating access codes.
+  - Even the API operator cannot forge a valid access code.
+- **Transparency**:
+  - Users can verify the validity of their own access codes on-chain.
+- **Flexibility**:
+  - The API can validate access codes in real-time without needing to manage its own database of keys.
+
 ## License
 
 This repository is licensed under the Apache 2.0 License. See the LICENSE file for details.
