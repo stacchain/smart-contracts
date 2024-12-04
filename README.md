@@ -174,12 +174,15 @@ npm run verify -- DEPLOYED_CONTRACT_ADDRESS
 - **Initial Supply**: 1,000,000 tokens minted to the deployer's address.
 - **Transfer Functionality**: Supports standard transfer, approve, and transferFrom.
 
-### STACAccessKey
+### STACAccessCode
 
-- **Access Control**: Users can purchase unique access keys using native cryptocurrency (e.g., MATIC).
-- **Event Emission**: Emits `KeyPurchased` and `KeyRevoked` events for tracking.
-- **Admin Features**: Owners can update key prices and revoke access.
-- **Security**: Ensures only one key purchase per user.
+- **Access Control**: Users can purchase unique access codes using native cryptocurrency (e.g., MATIC). Each code is tied to a specific user and can be reused by the same user for the duration of its validity.
+- **Event Emission**: Emits `AccessCodeGenerated` and `AccessCodeRevoked` events for real-time tracking and integration with external systems.
+- **Admin Features**: Contract owners can update access prices, revoke access for users, and withdraw accumulated funds.
+- **Security**:
+  - The actual access code is private and not stored on-chain. Only its hashed version is recorded for validation purposes.
+  - Ensures that access codes are user-specific and cannot be used by others.
+  - Supports time-limited validity for access codes to balance user convenience and security.
 
 ## License
 
