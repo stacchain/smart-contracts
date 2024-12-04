@@ -1,4 +1,42 @@
-# **stacchain**
+# **stacchain** - smart contract examples
+
+## Table of Contents
+
+1. [Smart Contracts for the STAC Ecosystem](#smart-contracts-for-the-stac-ecosystem)
+2. [Security Warning](#security-warning)
+3. [Features](#features)
+4. [Repository Structure](#repository-structure)
+5. [Prerequisites](#prerequisites)
+6. [Getting Started](#getting-started)
+   1. [Clone the Repository](#1-clone-the-repository)
+   2. [Install Dependencies](#2-install-dependencies)
+   3. [Set Up Environment Variables](#3-set-up-environment-variables)
+   4. [Compile the Contracts](#4-compile-the-contracts)
+7. [Usage](#usage)
+   1. [Deploy Contracts](#deploy-contracts)
+   2. [Run Tests](#run-tests)
+   3. [Verifying Contracts](#verifying-contracts)
+   4. [Project Scripts](#project-scripts)
+8. [Key Features](#key-features)
+   1. [STACToken](#stactoken)
+   2. [STACAccessCode](#stacaccesscode)
+9. [How an External API Validates an Access Code](#how-an-external-api-validates-an-access-code)
+   1. [User Interaction with the API](#1-user-interaction-with-the-api)
+   2. [API Queries the Blockchain](#2-api-queries-the-blockchain)
+   3. [Blockchain Verification](#3-blockchain-verification)
+   4. [API Grants or Denies Access](#4-api-grants-or-denies-access)
+10. [Example Workflow](#example-workflow)
+    1. [Step 1: User Sends Request](#step-1-user-sends-request)
+    2. [Step 2: API Validates the Access Code](#step-2-api-validates-the-access-code)
+    3. [Step 3: Grant or Deny Access](#step-3-grant-or-deny-access)
+11. [How the API Identifies a Valid Code](#how-the-api-identifies-a-valid-code)
+    1. [Tied to the User's Address](#1-tied-to-the-users-address)
+    2. [Tamper-Proof Hash](#2-tamper-proof-hash)
+    3. [Expiration Time](#3-expiration-time)
+12. [Advantages of On-Chain Validation](#advantages-of-on-chain-validation)
+13. [License](#license)
+14. [Contributions](#contributions)
+15. [Contact](#contact)
 
 ## Smart Contracts for the STAC Ecosystem
 
