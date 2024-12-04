@@ -6,8 +6,9 @@
     "scripts": {
       "compile": "npx hardhat compile",
       "test": "npx hardhat test",
-      "deploy:token": "npx hardhat run scripts/deploySTACToken.js --network mumbai",
-      "deploy:access": "npx hardhat run scripts/deploySTACAccessKey.js --network mumbai",
+      "deploy:token:mumbai": "npx hardhat run scripts/deploySTACToken.js --network mumbai",
+      "deploy:access:mumbai": "npx hardhat run scripts/deploySTACAccessKey.js --network mumbai",
+      "deploy:access:polygon": "npx hardhat run scripts/deploySTACAccessKey.js --network polygon",
       "verify": "npx hardhat verify --network mumbai"
     },
     "dependencies": {
