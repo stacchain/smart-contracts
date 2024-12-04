@@ -1,0 +1,36 @@
+{
+    "name": "stacchain-smart-contracts",
+    "version": "1.0.0",
+    "description": "Smart contracts for STAC token and access key functionality",
+    "main": "hardhat.config.js",
+    "scripts": {
+      "compile": "npx hardhat compile",
+      "test": "npx hardhat test",
+      "deploy:token": "npx hardhat run scripts/deploySTACToken.js --network mumbai",
+      "deploy:access": "npx hardhat run scripts/deploySTACAccessKey.js --network mumbai",
+      "verify": "npx hardhat verify --network mumbai"
+    },
+    "dependencies": {
+      "@openzeppelin/contracts": "^4.9.2",
+      "dotenv": "^16.0.3"
+    },
+    "devDependencies": {
+      "@nomiclabs/hardhat-ethers": "^2.3.3",
+      "@nomiclabs/hardhat-etherscan": "^3.1.2",
+      "chai": "^4.3.7",
+      "ethers": "^5.7.2",
+      "hardhat": "^2.17.0"
+    },
+    "keywords": [
+      "smart-contracts",
+      "hardhat",
+      "polygon",
+      "ethereum",
+      "erc20",
+      "access-key",
+      "stac"
+    ],
+    "author": "Jonathan Healy",
+    "license": "Apache-2.0"
+  }
+  
